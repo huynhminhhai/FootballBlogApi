@@ -2,31 +2,37 @@
 
 @{
     ViewData["Title"] = "Breaking news";
-    ViewData["Desc"] = "Lorem Ipsum is simply dummy text of the printing and typesetting industry";
+    ViewData["Desc"] = "Liverpool Fan Zone";
+    ViewData["Since"] = DateTime.Now.ToString("dd MMMM, yyyy - hh:mm tt");
 }
 
 <div class="blog">
     <div class="container-fluid">
         <div class="blog-heading">
-            <div class="row">
-                <div class="col-12 col-md-4">
-                    <h1 class="title">@ViewData["Title"]</h1>
-                    <div class="desc">@ViewData["Desc"]</div>
-                </div>
+            <div class="logo">
+                <img src="https://rbleipzig.com/_next/image?url=https%3A%2F%2Fimg.rbleipzig.com%2Fq_100%2Cf_auto%2Flive%2FLiverpool_FC-1729507168902.png&w=256&q=100"
+                    alt="logo">
+            </div>
+            <div class="heading">
+                <div class="since">@ViewData["Since"]</div>
+                <h1 class="title">@ViewData["Title"]</h1>
+                <div class="desc">@ViewData["Desc"]</div>
+            </div>
+            <div class="info">
+
             </div>
         </div>
 
-        <div class="blog-list">
-            @if (Model != null && Model.Any())
-            {
+        @if (Model != null && Model.Any())
+        {
+            <div class="blog-list">
                 <div class="blog-list-main">
                     @foreach (var post in Model.Take(2))
                     {
                         <div class="blog-item">
                             <a href="@Url.Action("Detail", "Home", new { id = post.Id })" class="card">
                                 <div class="img-top-card">
-                                    <img src="https://backend.liverpoolfc.com/sites/default/files/styles/md/public/2025-04/Champions-Wall-main-280425_8063e82c7f1f54b5ec773d26cd7f4878.webp?itok=zSrfX5HH&width=1680"
-                                        alt="@post.Title">
+                                    <img src="@post.Thumbnail" alt="@post.Title">
                                 </div>
                                 <div class="card-body">
                                     <div class="info">@post.CategoryName | @post.PublishedDate.ToString("dd MMMM, yyyy")</div>
@@ -43,8 +49,7 @@
                         <div class="blog-item">
                             <a href="@Url.Action("Detail", "Home", new { id = post.Id })" class="card">
                                 <div class="img-top-card">
-                                    <img src="https://backend.liverpoolfc.com/sites/default/files/styles/md/public/2025-04/Champions-Wall-main-280425_8063e82c7f1f54b5ec773d26cd7f4878.webp?itok=zSrfX5HH&width=1680"
-                                        alt="@post.Title">
+                                    <img src="@post.Thumbnail" alt="@post.Title">
                                 </div>
                                 <div class="card-body">
                                     <div class="info">@post.CategoryName | @post.PublishedDate.ToString("dd MMMM, yyyy")</div>
@@ -54,12 +59,12 @@
                         </div>
                     }
                 </div>
-            }
-            else
-            {
-                <div class="text-center">Bài viết không tồn tại!</div>
-            }
+            </div>
+        }
+        else
+        {
+            <div class="text-center">Bài viết không tồn tại!</div>
+        }
 
-        </div>
     </div>
 </div>

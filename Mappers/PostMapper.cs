@@ -12,6 +12,7 @@ namespace FootballBlogApi.Mappers
                 Id = post.Id,
                 Title = post.Title,
                 Content = post.Content,
+                Thumbnail = post.Thumbnail,
                 CategoryName = post.Category.Name,
                 PublishedDate = post.PublishedDate
             };
