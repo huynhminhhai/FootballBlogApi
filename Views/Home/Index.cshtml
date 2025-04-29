@@ -1,8 +1,65 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model List<FootballBlogApi.Dtos.Post.PostDto>
+
+@{
+    ViewData["Title"] = "Breaking news";
+    ViewData["Desc"] = "Lorem Ipsum is simply dummy text of the printing and typesetting industry";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="blog">
+    <div class="container-fluid">
+        <div class="blog-heading">
+            <div class="row">
+                <div class="col-12 col-md-4">
+                    <h1 class="title">@ViewData["Title"]</h1>
+                    <div class="desc">@ViewData["Desc"]</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="blog-list">
+            @if (Model != null && Model.Any())
+            {
+                <div class="blog-list-main">
+                    @foreach (var post in Model.Take(2))
+                    {
+                        <div class="blog-item">
+                            <a href="@Url.Action("Detail", "Home", new { id = post.Id })" class="card">
+                                <div class="img-top-card">
+                                    <img src="https://backend.liverpoolfc.com/sites/default/files/styles/md/public/2025-04/Champions-Wall-main-280425_8063e82c7f1f54b5ec773d26cd7f4878.webp?itok=zSrfX5HH&width=1680"
+                                        alt="@post.Title">
+                                </div>
+                                <div class="card-body">
+                                    <div class="info">@post.CategoryName | @post.PublishedDate.ToString("dd MMMM, yyyy")</div>
+                                    <h2 class="title">@post.Title</h2>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                </div>
+
+                <div class="blog-list-sub">
+                    @foreach (var post in Model.Skip(2))
+                    {
+                        <div class="blog-item">
+                            <a href="@Url.Action("Detail", "Home", new { id = post.Id })" class="card">
+                                <div class="img-top-card">
+                                    <img src="https://backend.liverpoolfc.com/sites/default/files/styles/md/public/2025-04/Champions-Wall-main-280425_8063e82c7f1f54b5ec773d26cd7f4878.webp?itok=zSrfX5HH&width=1680"
+                                        alt="@post.Title">
+                                </div>
+                                <div class="card-body">
+                                    <div class="info">@post.CategoryName | @post.PublishedDate.ToString("dd MMMM, yyyy")</div>
+                                    <h2 class="title">@post.Title</h2>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="text-center">Bài viết không tồn tại!</div>
+            }
+
+        </div>
+    </div>
 </div>

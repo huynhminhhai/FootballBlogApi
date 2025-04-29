@@ -1,0 +1,16 @@
+@model FootballBlogApi.Dtos.Post.PostDto
+
+@{
+    ViewData["Title"] = "Blog";
+}
+
+@if (Model == null)
+{
+    <h2>Bài viết không tồn tại!</h2>
+}
+else
+{
+    <h1>@Model.Title</h1>
+    <p>@Model.PublishedDate.ToString("dd/MM/yyyy")</p>
+    <div>@Model.Content</div>
+}
